@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'profile_page.dart';
-import 'settings_page.dart';
 
 class HomePage extends StatelessWidget {
   final String userEmail; // pass user email from login (optional)
@@ -15,27 +13,11 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
-            tooltip: "Profile",
+            icon: Icon(Icons.logout),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ProfilePage(userEmail: userEmail),
-                ),
-              );
+              Navigator.pop(context); // go back to login
             },
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            tooltip: "Settings",
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SettingsPage()),
-              );
-            },
-          ),
+          )
         ],
       ),
       body: Padding(
@@ -43,10 +25,9 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Welcome back, $userEmail 👋",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+            Text("Welcome back, $userEmail 👋",
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 20),
 
             // Stats Grid
@@ -56,9 +37,12 @@ class HomePage extends StatelessWidget {
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
                 children: [
-                  _buildDashboardCard(Icons.fitness_center, "Workouts", "5 today"),
-                  _buildDashboardCard(Icons.local_fire_department, "Calories", "1,200 kcal"),
-                  _buildDashboardCard(Icons.timer, "Time Spent", "45 mins"),
+                  _buildDashboardCard(
+                      Icons.fitness_center, "Workouts", "5 today"),
+                  _buildDashboardCard(
+                      Icons.local_fire_department, "Calories", "1,200 kcal"),
+                  _buildDashboardCard(
+                      Icons.timer, "Time Spent", "45 mins"),
                   _buildDashboardCard(Icons.star, "XP", "320 pts"),
                 ],
               ),
@@ -80,7 +64,8 @@ class HomePage extends StatelessWidget {
           children: [
             Icon(icon, size: 40, color: Colors.redAccent),
             SizedBox(height: 10),
-            Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text(title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 5),
             Text(subtitle, style: TextStyle(color: Colors.grey[700])),
           ],
