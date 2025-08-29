@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'signup_page.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,8 +16,8 @@ class _LoginPageState extends State<LoginPage>
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool _obscurePassword = true; // show/hide password
-  bool _rememberMe = false; // remember me checkbox
+  bool _obscurePassword = true;
+  bool _rememberMe = false;
 
   @override
   void initState() {
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     SizedBox(height: 15),
 
-                    // Password with eye toggle
+                    // Password
                     TextField(
                       controller: _passwordController,
                       obscureText: _obscurePassword,
@@ -110,7 +112,7 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     SizedBox(height: 10),
 
-                    // ✅ Remember Me + Forgot Password
+                    // Remember Me + Forgot Password
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -129,7 +131,6 @@ class _LoginPageState extends State<LoginPage>
                         ),
                         TextButton(
                           onPressed: () {
-                            // You can add navigation to "Forgot Password Page"
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Forgot Password tapped")),
                             );
@@ -166,7 +167,6 @@ class _LoginPageState extends State<LoginPage>
                           return;
                         }
 
-                        // You can handle "Remember Me" logic here
                         if (_rememberMe) {
                           print("User chose to be remembered ✅");
                         }
@@ -181,6 +181,32 @@ class _LoginPageState extends State<LoginPage>
                         "Login",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    // ✅ Sign Up Link
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don’t have an account? "),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => SignUpPage()),
+                            );
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
